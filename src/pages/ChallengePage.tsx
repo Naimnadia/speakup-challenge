@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -10,49 +9,40 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Award, Check, ChevronLeft, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-
 const ChallengePage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [stage, setStage] = useState<'intro' | 'recording' | 'completed'>('intro');
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const navigate = useNavigate();
-  
   const currentChallenge = {
     title: "Describe Your Hometown",
     prompt: "Talk about what makes your hometown special. Describe the places, people, and why you like or dislike living there. What would you recommend visitors to see and do?",
     difficulty: "easy",
-    duration: 120, // in seconds
+    duration: 120,
+    // in seconds
     xpReward: 100,
-    tips: [
-      "Start with a brief introduction of your hometown (name, location)",
-      "Use descriptive vocabulary to paint a picture",
-      "Include both advantages and challenges of living there",
-      "End with a personal reflection on what your hometown means to you"
-    ]
+    tips: ["Start with a brief introduction of your hometown (name, location)", "Use descriptive vocabulary to paint a picture", "Include both advantages and challenges of living there", "End with a personal reflection on what your hometown means to you"]
   };
-  
   const handleComplete = () => {
     setStage('completed');
     toast({
       title: "Challenge completed!",
-      description: "You've earned 100 XP and continued your streak!",
+      description: "You've earned 100 XP and continued your streak!"
     });
   };
-  
   const handleCancel = () => {
     setStage('intro');
     toast({
       description: "Challenge canceled. You can try again.",
-      variant: "destructive",
+      variant: "destructive"
     });
   };
-  
   const handleBackToDashboard = () => {
     navigate('/');
   };
-  
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+  return <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
       <div className="flex flex-1">
@@ -60,54 +50,27 @@ const ChallengePage = () => {
         
         <main className="flex-1 p-4 lg:p-6 lg:ml-64 transition-all duration-300">
           <div className="container mx-auto max-w-3xl">
-            <Button 
-              variant="ghost" 
-              className="mb-4" 
-              onClick={handleBackToDashboard}
-            >
+            <Button variant="ghost" className="mb-4" onClick={handleBackToDashboard}>
               <ChevronLeft className="w-4 h-4 mr-1" /> Back to Dashboard
             </Button>
             
-            {stage === 'intro' && (
-              <div className="space-y-6">
-                <TopicCard 
-                  title={currentChallenge.title}
-                  prompt={currentChallenge.prompt}
-                  difficulty={currentChallenge.difficulty as 'easy' | 'medium' | 'hard'}
-                  tips={currentChallenge.tips}
-                />
+            {stage === 'intro' && <div className="space-y-6">
+                <TopicCard title={currentChallenge.title} prompt={currentChallenge.prompt} difficulty={currentChallenge.difficulty as 'easy' | 'medium' | 'hard'} tips={currentChallenge.tips} />
                 
                 <div className="text-center">
-                  <Button 
-                    size="lg" 
-                    className="bg-speakup-blue hover:bg-speakup-blue/90"
-                    onClick={() => setStage('recording')}
-                  >
+                  <Button size="lg" onClick={() => setStage('recording')} className="bg-[#f00d91]">
                     Start Speaking Challenge
                   </Button>
                 </div>
-              </div>
-            )}
+              </div>}
             
-            {stage === 'recording' && (
-              <div className="space-y-6">
-                <TopicCard 
-                  title={currentChallenge.title}
-                  prompt={currentChallenge.prompt}
-                  difficulty={currentChallenge.difficulty as 'easy' | 'medium' | 'hard'}
-                  tips={currentChallenge.tips}
-                />
+            {stage === 'recording' && <div className="space-y-6">
+                <TopicCard title={currentChallenge.title} prompt={currentChallenge.prompt} difficulty={currentChallenge.difficulty as 'easy' | 'medium' | 'hard'} tips={currentChallenge.tips} />
                 
-                <ChallengeTimer 
-                  duration={currentChallenge.duration}
-                  onComplete={handleComplete}
-                  onCancel={handleCancel}
-                />
-              </div>
-            )}
+                <ChallengeTimer duration={currentChallenge.duration} onComplete={handleComplete} onCancel={handleCancel} />
+              </div>}
             
-            {stage === 'completed' && (
-              <Card className="border-2 border-green-500 shadow-md animate-bounce-in">
+            {stage === 'completed' && <Card className="border-2 border-green-500 shadow-md animate-bounce-in">
                 <CardHeader className="pb-2 text-center">
                   <CardTitle className="text-xl text-green-600 flex items-center justify-center">
                     <Check className="w-5 h-5 mr-2" />
@@ -147,20 +110,14 @@ const ChallengePage = () => {
                 </CardContent>
                 
                 <CardFooter className="flex justify-center gap-3">
-                  <Button
-                    onClick={handleBackToDashboard}
-                    className="bg-speakup-blue hover:bg-speakup-blue/90"
-                  >
+                  <Button onClick={handleBackToDashboard} className="bg-speakup-blue hover:bg-speakup-blue/90">
                     Back to Dashboard
                   </Button>
                 </CardFooter>
-              </Card>
-            )}
+              </Card>}
           </div>
         </main>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ChallengePage;
