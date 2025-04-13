@@ -1,86 +1,60 @@
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import Header from '@/components/Header';
-import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage,
-  FormDescription
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { 
-  Dialog,
-  DialogContent, 
-  DialogDescription, 
-  DialogHeader, 
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { PlusCircle, ListPlus, Clock, Star, Mic } from 'lucide-react';
-
 const challengeSchema = z.object({
-  title: z.string().min(5, { message: 'Title must be at least 5 characters' }),
-  description: z.string().min(20, { message: 'Description must be at least 20 characters' }),
-  difficulty: z.enum(['easy', 'medium', 'hard'], { 
-    required_error: 'Please select a difficulty level' 
+  title: z.string().min(5, {
+    message: 'Title must be at least 5 characters'
   }),
-  timeEstimate: z.string().min(1, { message: 'Please provide a time estimate' }),
-  xpReward: z.coerce.number().min(10, { message: 'XP reward must be at least 10 points' }),
-  instructions: z.string().min(20, { message: 'Instructions must be at least 20 characters' }),
+  description: z.string().min(20, {
+    message: 'Description must be at least 20 characters'
+  }),
+  difficulty: z.enum(['easy', 'medium', 'hard'], {
+    required_error: 'Please select a difficulty level'
+  }),
+  timeEstimate: z.string().min(1, {
+    message: 'Please provide a time estimate'
+  }),
+  xpReward: z.coerce.number().min(10, {
+    message: 'XP reward must be at least 10 points'
+  }),
+  instructions: z.string().min(20, {
+    message: 'Instructions must be at least 20 characters'
+  })
 });
-
 type ChallengeFormValues = z.infer<typeof challengeSchema>;
 
 // Sample data for the challenges table
-const sampleChallenges = [
-  {
-    id: 1,
-    title: "Describe Your Hometown",
-    difficulty: "easy",
-    timeEstimate: "3-5 min",
-    xpReward: 50
-  },
-  {
-    id: 2,
-    title: "Debate Climate Change Solutions",
-    difficulty: "hard",
-    timeEstimate: "10-15 min",
-    xpReward: 150
-  },
-  {
-    id: 3,
-    title: "Explain Your Favorite Hobby",
-    difficulty: "medium",
-    timeEstimate: "5-8 min",
-    xpReward: 100
-  }
-];
-
+const sampleChallenges = [{
+  id: 1,
+  title: "Describe Your Hometown",
+  difficulty: "easy",
+  timeEstimate: "3-5 min",
+  xpReward: 50
+}, {
+  id: 2,
+  title: "Debate Climate Change Solutions",
+  difficulty: "hard",
+  timeEstimate: "10-15 min",
+  xpReward: 150
+}, {
+  id: 3,
+  title: "Explain Your Favorite Hobby",
+  difficulty: "medium",
+  timeEstimate: "5-8 min",
+  xpReward: 100
+}];
 const AdminChallenge = () => {
   const form = useForm<ChallengeFormValues>({
     resolver: zodResolver(challengeSchema),
@@ -90,21 +64,18 @@ const AdminChallenge = () => {
       difficulty: 'medium',
       timeEstimate: '',
       xpReward: 50,
-      instructions: '',
-    },
+      instructions: ''
+    }
   });
-
   const onSubmit = (data: ChallengeFormValues) => {
     console.log('Challenge data:', data);
     // Here you would typically send this to a backend API
-    
+
     // Simulate success
     toast.success('Challenge added successfully!');
     form.reset();
   };
-
-  return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+  return <div className="min-h-screen bg-slate-50 flex flex-col">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -113,7 +84,7 @@ const AdminChallenge = () => {
           
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="bg-speakup-blue hover:bg-blue-800">
+              <Button className="bg-[#ef118b]">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add New Challenge
               </Button>
@@ -128,11 +99,9 @@ const AdminChallenge = () => {
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="title" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Challenge Title</FormLabel>
                         <FormControl>
                           <Input placeholder="E.g., Describe Your Dream Vacation" {...field} />
@@ -141,21 +110,14 @@ const AdminChallenge = () => {
                           A concise and engaging title for the challenge.
                         </FormDescription>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="difficulty"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="difficulty" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Difficulty Level</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select difficulty" />
@@ -168,74 +130,48 @@ const AdminChallenge = () => {
                             </SelectContent>
                           </Select>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                     
-                    <FormField
-                      control={form.control}
-                      name="timeEstimate"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="timeEstimate" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Time Estimate</FormLabel>
                           <FormControl>
                             <Input placeholder="E.g., 5-7 min" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                     
-                    <FormField
-                      control={form.control}
-                      name="xpReward"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="xpReward" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>XP Reward</FormLabel>
                           <FormControl>
                             <Input type="number" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                   </div>
                   
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="description" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Challenge Description</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Briefly describe the challenge and its purpose." 
-                            className="min-h-[80px]"
-                            {...field}
-                          />
+                          <Textarea placeholder="Briefly describe the challenge and its purpose." className="min-h-[80px]" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                   
-                  <FormField
-                    control={form.control}
-                    name="instructions"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="instructions" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Challenge Instructions</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Detailed instructions for the user. Include any specific points they should address."
-                            className="min-h-[120px]"
-                            {...field}
-                          />
+                          <Textarea placeholder="Detailed instructions for the user. Include any specific points they should address." className="min-h-[120px]" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                   
                   <div className="flex justify-end space-x-2 pt-4">
                     <Button type="button" variant="outline" onClick={() => form.reset()}>
@@ -274,16 +210,11 @@ const AdminChallenge = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {sampleChallenges.map((challenge) => (
-                  <TableRow key={challenge.id}>
+                {sampleChallenges.map(challenge => <TableRow key={challenge.id}>
                     <TableCell className="font-medium">{challenge.id}</TableCell>
                     <TableCell>{challenge.title}</TableCell>
                     <TableCell className="hidden md:table-cell">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        challenge.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
-                        challenge.difficulty === 'medium' ? 'bg-orange-100 text-orange-800' :
-                        'bg-red-100 text-red-800'
-                      }`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${challenge.difficulty === 'easy' ? 'bg-green-100 text-green-800' : challenge.difficulty === 'medium' ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}`}>
                         {challenge.difficulty.charAt(0).toUpperCase() + challenge.difficulty.slice(1)}
                       </span>
                     </TableCell>
@@ -309,8 +240,7 @@ const AdminChallenge = () => {
                         </svg>
                       </Button>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
           </CardContent>
@@ -324,8 +254,6 @@ const AdminChallenge = () => {
           </CardFooter>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AdminChallenge;
