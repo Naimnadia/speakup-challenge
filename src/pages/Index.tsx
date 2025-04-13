@@ -139,9 +139,7 @@ const Index = () => {
                     {achievements.map((achievement, index) => <AchievementCard key={index} title={achievement.title} description={achievement.description} progress={achievement.progress} icon={achievement.icon} completed={achievement.completed} iconBgColor={achievement.iconBgColor} iconColor={achievement.iconColor} />)}
                   </div>
                   <div className="mt-4 text-center">
-                    <Button variant="outline">
-                      View All Achievements
-                    </Button>
+                    
                   </div>
                 </div>
               </div>

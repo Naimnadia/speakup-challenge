@@ -21,7 +21,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
   className,
   iconColor = "text-speakup-blue"
 }) => {
-  return <Card className="bg-fuchsia-100">
+  return <Card className="bg-slate-50">
       <CardContent className="p-6">
         <div className="flex justify-between items-start">
           <div>
