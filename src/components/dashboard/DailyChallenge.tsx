@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Mic, Clock, Play } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-
 interface DailyChallengeProps {
   title: string;
   description: string;
@@ -13,7 +11,6 @@ interface DailyChallengeProps {
   xpReward: number;
   onStart: () => void;
 }
-
 const DailyChallenge: React.FC<DailyChallengeProps> = ({
   title,
   description,
@@ -27,9 +24,7 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
     'medium': 'bg-orange-100 text-orange-800',
     'hard': 'bg-red-100 text-red-800'
   };
-  
-  return (
-    <Card className="border-2 border-speakup-blue shadow-md hover:shadow-lg transition-shadow">
+  return <Card className="border-2 border-speakup-blue shadow-md hover:shadow-lg transition-shadow bg-purple-100">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-bold text-speakup-dark">{title}</CardTitle>
@@ -60,19 +55,14 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
       </CardContent>
       
       <CardFooter>
-        <Button 
-          className="w-full bg-speakup-blue hover:bg-speakup-blue/90 group"
-          onClick={onStart}
-        >
+        <Button className="w-full bg-speakup-blue hover:bg-speakup-blue/90 group" onClick={onStart}>
           <Play className="w-4 h-4 mr-2 group-hover:animate-pulse" />
           Start Challenge
         </Button>
       </CardFooter>
-    </Card>
-  );
+    </Card>;
 };
 
 // Add missing Star import
 import { Star } from 'lucide-react';
-
 export default DailyChallenge;
