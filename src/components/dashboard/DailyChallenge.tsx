@@ -25,7 +25,7 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
     'hard': 'bg-red-100 text-red-800'
   };
   return <Card className="border-2 border-speakup-blue shadow-md hover:shadow-lg transition-shadow bg-purple-100">
-      <CardHeader className="pb-2 bg-slate-50">
+      <CardHeader className="pb-2 rounded-xl bg-slate-50">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-bold text-speakup-dark">{title}</CardTitle>
           <Badge className={difficultyColors[difficulty]} variant="outline">
@@ -50,11 +50,11 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
         
         <div className="flex items-center text-sm font-medium text-speakup-purple">
           <Star className="w-4 h-4 mr-1" />
-          <span>{xpReward} XP Reward</span>
+          <span className="text-[#e20eb7]">{xpReward} XP Reward</span>
         </div>
       </CardContent>
       
-      <CardFooter className="bg-slate-50">
+      <CardFooter className="rounded-xl bg-slate-50">
         <Button onClick={onStart} className="w-full group bg-blue-950 hover:bg-blue-800 text-slate-50 font-medium">
           <Play className="w-4 h-4 mr-2 group-hover:animate-pulse" />
           Start Challenge
