@@ -55,7 +55,7 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
       </CardContent>
       
       <CardFooter className="rounded-xl bg-slate-50">
-        <Button onClick={onStart} className="w-full group bg-blue-950 hover:bg-blue-800 text-slate-50 font-medium">
+        <Button onClick={onStart} className="w-full group text-slate-50 font-medium bg-[#e40f72]">
           <Play className="w-4 h-4 mr-2 group-hover:animate-pulse" />
           Start Challenge
         </Button>
