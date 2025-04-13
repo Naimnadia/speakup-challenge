@@ -25,7 +25,7 @@ const DailyChallenge: React.FC<DailyChallengeProps> = ({
     'hard': 'bg-red-100 text-red-800'
   };
   return <Card className="border-2 border-speakup-blue shadow-md hover:shadow-lg transition-shadow bg-purple-100">
-      <CardHeader className="pb-2 rounded-xl bg-slate-50">
+      <CardHeader className="pb-2 bg-slate-50 rounded-sm">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-bold text-[#db0189]">{title}</CardTitle>
           <Badge className={difficultyColors[difficulty]} variant="outline">
