@@ -96,7 +96,7 @@ const Index = () => {
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
         <main className="flex-1 p-4 lg:p-6 lg:ml-64 transition-all duration-300">
-          <div className="container mx-auto bg-pink-100">
+          <div className="container mx-auto bg-indigo-100">
             {/* Welcome and level progress */}
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-speakup-dark mb-2">Welcome back!</h1>
@@ -119,7 +119,7 @@ const Index = () => {
             {/* Main content grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Left column - challenges */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className="lg:col-span-2 space-y-6 bg-blue-100">
                 <div>
                   <h2 className="text-lg font-semibold text-speakup-dark mb-3 flex items-center">
                     <MessageSquare className="w-5 h-5 mr-2 text-speakup-blue" />
